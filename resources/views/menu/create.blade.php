@@ -2,7 +2,7 @@
 @section('konten')
 
     <div class="container mx-auto p-6">
-        <form method="POST" action="{{ route('akun.store') }}" enctype="multipart/form-data" class="p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto">
+        <form method="POST" action="{{ route('menu.store') }}" enctype="multipart/form-data" class="p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto">
             @csrf
             <div class="text-center mb-6">
                 <h2 class="text-2xl font-bold">Absensi</h2>
@@ -34,7 +34,6 @@
                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
-
 
             <!-- Lokasi Rootshow -->
             <div class="mb-4">

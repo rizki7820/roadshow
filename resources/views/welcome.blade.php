@@ -19,7 +19,7 @@
 
 <body>
 
-    @yield('konten')
+   <h1>SELAMAT DATANG</h1>
 
 </body>
 

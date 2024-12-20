@@ -22,4 +22,12 @@ Route::get('/home', function () {
 
 Route::resource('menu', Cakun::class);
 
+Route::resource('akun', AkunController::class);
+Route::resource('note', NoteController::class);
+
+Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
+Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
+Route::get('/izin', [IzinController::class, 'index'])->name('izin.index');
+
+
 

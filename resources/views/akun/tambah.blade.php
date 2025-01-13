@@ -35,6 +35,7 @@
                 @enderror
             </div>
 
+            <div id="map" style="" class=""></div>
 
             <!-- Lokasi Rootshow -->
             <div class="mb-4">
@@ -62,6 +63,63 @@
             </div>
         </form>
     </div>
+    
 
 
 @endsection
+
+@push('styles')
+    <!-- CSS untuk Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+@endpush
+
+@push('scripts')
+    <!-- Script Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13); // Inisialisasi peta
+
+        // Menambahkan tile layer OpenStreetMap ke peta
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Menambahkan marker default di posisi tertentu
+        var marker = L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('Lokasi Default')
+            .openPopup();
+
+        // Menangani klik pada peta untuk menempatkan marker baru
+        map.on('click', function(e) {
+            var latlng = e.latlng;
+            marker.setLatLng(latlng); // Set marker ke posisi klik
+            document.getElementById("lokasi").value = latlng.lat.toFixed(6) + ", " + latlng.lng.toFixed(6); // Set input lokasi
+        });
+
+        // Fungsi untuk mendapatkan lokasi terkini pengguna
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+                    
+                    // Pusatkan peta pada lokasi terkini
+                    map.setView([lat, lng], 13);
+                    
+                    // Tambahkan marker untuk lokasi terkini
+                    marker.setLatLng([lat, lng]).bindPopup('Lokasi Terkini').openPopup();
+                    
+                    // Set input lokasi dengan koordinat terkini
+                    document.getElementById("lokasi").value = lat.toFixed(6) + ", " + lng.toFixed(6);
+                });
+            } else {
+                alert("Geolocation tidak didukung oleh browser ini.");
+            }
+        }
+
+        // Panggil fungsi untuk mendapatkan lokasi terkini saat peta dimuat
+        getCurrentLocation();
+
+    </script>
+@endpush

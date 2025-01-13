@@ -19,7 +19,13 @@
 
 <body>
 
-   <h1>SELAMAT DATANG</h1>
+   <div class="bg-gray-100 h-screen font-sans">
+
+    @yield('konten')
+    @stack('scripts')
+
+    </div>
+
 
 </body>
 

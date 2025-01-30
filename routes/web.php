@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::get('/register', [AuthenticatedSessionController::class, 'daftar'])->name('register');
 
 
 Route::resource('menu', Cakun::class);

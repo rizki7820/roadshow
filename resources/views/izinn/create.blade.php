@@ -1,7 +1,7 @@
 @extends('../welcome')
 @section('konten')
 <div class="container mx-auto p-6">
-    <form method="POST" action="{{ route('izin.store') }}" enctype="multipart/form-data" class="p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto">
+    <form method="POST" action="{{ route('izinn.store') }}" enctype="multipart/form-data" class="p-6 bg-white rounded-lg shadow-lg max-w-lg mx-auto">
         @csrf
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold">Form Izin</h2>

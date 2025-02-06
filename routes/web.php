@@ -32,4 +32,7 @@ Route::resource('note', NoteController::class);
 
 Route::resource('izinn', IzinnController::class);
 
+require __DIR__ . '/auth.php';
+
+
 

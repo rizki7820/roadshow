@@ -57,18 +57,22 @@ class AuthenticatedSessionController extends Controller
     {
         $request->validate([
             'name'           => 'required|int|min:5|unique:akuns,nip',
+            'birthdate'      => 'required|date',
             'email'          => 'required|string|max:255',
+            'new_email'      => 'required|string|min:5|unique:users,email',
             'username'       => 'required|int|min:10|unique:akuns,no_telfon',
+            'new_username'   => 'required|string|min:5|unique:users,username',
             'level'          => 'required|string',
-            'passoword'      => 'required|mimes:jpg,png',
+            'passoword'      => 'required|string',
         ]);
     
         User::create([
             'name'           => $request->name,
-            'email'          => $request->email,
-            'username'       => $request->username,
+            'birthdate'      => $request->birthdate,
+            'email'          => $request->new_email,
+            'username'       => $request->new_username,
             'level'          => $request->level,
-            'password'       => $request->password,
+            'password'       => Hash::make($request->password),
         ]);
     
         return redirect()->route('akun.create')->with('success', 'Data akun anda berhasil disimpan');

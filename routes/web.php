@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\IzinnController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('/home', function () {
 Route::get('/register', [AuthenticatedSessionController::class, 'daftar'])->name('register');
 
 
-Route::resource('menu', Cakun::class);
+// Route::resource('menu', AkunController::class);
 
 Route::resource('akun', AkunController::class);
 Route::resource('note', NoteController::class);

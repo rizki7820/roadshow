@@ -29,10 +29,14 @@
                             <span class="ml-4">Absensi</span>
                         </li>
                     </a>
+
+                    <a href="{{ route('note.create') }}">
                     <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
                         <span class="material-icons">description</span>
                         <span class="ml-4">Catatan Harian</span>
                     </li>
+                    </a>
+                    <a href="{{ route('akun.create') }}">
                     <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
                         <a href="">
                             <span class="material-icons">account_circle</span>

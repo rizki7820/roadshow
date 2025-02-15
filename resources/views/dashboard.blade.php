@@ -23,7 +23,7 @@
                         <span class="material-icons">home</span>
                         <span class="ml-4">Dashboard</span>
                     </li>
-                    <a href="{{ route('menu.create') }}">
+                    <a href="{{ route('akun.create') }}">
                         <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
                             <span class="material-icons">check_circle</span>
                             <span class="ml-4">Absensi</span>

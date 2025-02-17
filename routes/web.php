@@ -25,7 +25,7 @@ Route::get('/home', function () {
 Route::get('/register', [AuthenticatedSessionController::class, 'daftar'])->name('register');
 
 
-// Route::resource('menu', AkunController::class);
+Route::resource('menu', AkunController::class);
 
 Route::resource('akun', AkunController::class);
 Route::resource('note', NoteController::class);

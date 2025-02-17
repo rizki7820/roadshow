@@ -25,6 +25,20 @@ Route::get('/home', function () {
 Route::get('/register', [AuthenticatedSessionController::class, 'daftar'])->name('register');
 
 
+Route::get('/login', function() {
+    return view ('auth.login');
+})->name('login');
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
+
 // Route::resource('menu', AkunController::class);
 
 Route::resource('akun', AkunController::class);

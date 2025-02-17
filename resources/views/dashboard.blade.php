@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +14,7 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-red-600 text-white flex flex-col">
             <div class="py-4 text-center font-bold text-xl border-b border-red-700">
-                <span>selamat datang</span>
+                <span>Selamat Datang</span>
             </div>
             <nav class="flex-grow">
                 <ul>
@@ -38,14 +37,20 @@
                     </a>
                     <a href="{{ route('akun.create') }}">
                     <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <a href="">
-                            <span class="material-icons">account_circle</span>
-                            <span class="ml-4">Profil Saya</span>
-                        </a>
+                        <span class="material-icons">account_circle</span>
+                        <span class="ml-4">Profil Saya</span>
                     </li>
+                    </a>
+
+                    <!-- Logout -->
                     <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <span class="material-icons">logout</span>
-                        <span class="ml-4">Keluar</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="flex items-center">
+                                <span class="material-icons">logout</span>
+                                <span class="ml-4">Keluar</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -55,7 +60,6 @@
         <div class="flex-grow">
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300">
-
                 <div class="flex justify-end ">
                     <img src="{{ asset('assets/images/telokom.png') }}" alt="" class="h-14">
                 </div>

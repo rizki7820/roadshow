@@ -11,12 +11,9 @@
 
 <body class="bg-gray-100 h-screen">
     <div class="flex h-full">
-        <!-- Overlay -->
-        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden md:hidden"></div>
 
         <!-- Sidebar -->
-        <aside id="sidebar"
-            class="w-64 bg-red-600 text-white flex flex-col fixed md:relative h-full transform -translate-x-full md:translate-x-0 transition-transform z-50">
+        <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
             <div class="py-4 text-center font-bold text-xl border-b border-red-700">
                 <span>Selamat Datang</span>
             </div>
@@ -26,40 +23,46 @@
                         <span class="material-icons">home</span>
                         <span class="ml-4">Dashboard</span>
                     </li>
-                    <a href="{{ route('menu.create') }}">
+                    <a href="{{ route('akun.create') }}">
                         <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
                             <span class="material-icons">check_circle</span>
                             <span class="ml-4">Absensi</span>
                         </li>
                     </a>
                     <a href="{{ route('note.create') }}">
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <span class="material-icons">description</span>
-                        <span class="ml-4">Catatan Harian</span>
-                    </li>
+                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                            <span class="material-icons">description</span>
+                            <span class="ml-4">Catatan Harian</span>
+                        </li>
                     </a>
                     <a href="{{ route('akun.create') }}">
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <span class="material-icons">account_circle</span>
-                        <span class="ml-4">Profil Saya</span>
-                    </li>
+                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                            <span class="material-icons">account_circle</span>
+                            <span class="ml-4">Profil Saya</span>
+                        </li>
                     </a>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <span class="material-icons">logout</span>
-                        <span class="ml-4">Keluar</span>
-                    </li>
+                    <a href="/login">
+                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                            <span class="material-icons">logout</span>
+                            <span class="ml-4">Keluar</span>
+                        </li>
+                    </a>
                 </ul>
             </nav>
         </aside>
 
         <!-- Main Content -->
-        <div id="mainContent" class="flex-grow transition-all md:ml-64">
+        <div class="flex-grow">
+
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
-                <button id="toggleSidebar" class="bg-red-600 text-white px-4 py-2 rounded">
+                <!-- Toggle Button -->
+                <button id="toggleBtn" class="text-red-600">
                     <span class="material-icons">menu</span>
                 </button>
-                <img src="{{ asset('assets/images/telokom.png') }}" alt="" class="h-14">
+                <div>
+                    <img src="{{ asset('assets/images/telokom.png') }}" alt="Logo" class="h-14">
+                </div>
             </header>
 
             <!-- Content -->
@@ -69,31 +72,21 @@
                     <p class="text-gray-600">Ini adalah halaman utama untuk mengakses fitur-fitur sistem.</p>
                 </div>
             </main>
+
         </div>
     </div>
 
     <script>
         const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const toggleButton = document.getElementById('toggleSidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
 
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('w-64');
+            sidebar.classList.toggle('w-0');
+            sidebar.classList.toggle('invisible');
         });
     </script>
+
 </body>
 
 </html>

@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 Route::get('/', function () {
-    return redirect('/login');
+    return view('welcome');
 });
 Route::get('/home', function () {
     return view('dashboard');

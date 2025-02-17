@@ -37,7 +37,9 @@ class AuthenticatedSessionController extends Controller
         }
 
         if (Auth::attempt($request->only('username', 'password'))) {
-            $request->session()->regenerate(); // Tambahkan ini untuk keamanan
+            $request->session()->regenerate(); 
+
+            session()->flash('success', 'Login berhasil! Selamat datang di Dashboard.');
             return redirect()->route('dashboard');
         } else {
             return redirect()->back()->withErrors(['password' => 'Password salah.']);
@@ -89,5 +91,17 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.');
     }
+
+    public function logout(Request $request)
+{
+    // Melakukan logout
+    Auth::logout();
+
+    // Menutup sesi dan mengalihkan ke halaman login
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('login'); // Atau sesuaikan dengan rute yang sesuai
+}
     
 }

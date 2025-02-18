@@ -12,8 +12,6 @@
 <body class="bg-gray-100 h-screen">
     <div class="flex h-full">
 
-        <!-- Sidebar -->
-<!-- Sidebar -->
 <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
     <div id="sidebarHeader" class="py-4 text-center font-bold text-xl border-b border-red-700 flex items-center justify-center">
         <span id="welcomeText">Selamat Datang</span>
@@ -55,12 +53,10 @@
     </nav>
 </aside>
 
-        <!-- Main Content -->
         <div class="flex-grow">
 
-            <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
-                <!-- Toggle Button -->
+
                 <button id="toggleBtn" class="text-red-600">
                     <span class="material-icons">menu</span>
                 </button>
@@ -69,7 +65,6 @@
                 </div>
             </header>
 
-            <!-- Content -->
             @if(session('success'))
  <div id="success-notification" class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-green-300 text-gray-800 p-6 rounded-xl mb-4 mt-6 opacity-100 transition-all duration-1000 ease-out z-50 shadow-lg animate-bounce">
  <span class="material-icons mr-3">check_circle</span>
@@ -123,18 +118,18 @@ window.addEventListener('DOMContentLoaded', () => {
     toggleBtn.addEventListener('click', function() {
         if (sidebar.classList.contains('w-64')) {
             sidebar.classList.remove('w-64');
-            sidebar.classList.add('w-20'); // Sidebar kecil
-            welcomeText.classList.add('hidden'); // Sembunyikan teks "Selamat Datang"
-            username.classList.add('hidden'); // Sembunyikan username
-            profileIcon.classList.remove('hidden'); // Tampilkan ikon profil
-            sidebarTexts.forEach(text => text.classList.add('hidden')); // Sembunyikan teks menu
+            sidebar.classList.add('w-20');
+            welcomeText.classList.add('hidden'); 
+            username.classList.add('hidden'); 
+            profileIcon.classList.remove('hidden'); 
+            sidebarTexts.forEach(text => text.classList.add('hidden')); 
         } else {
             sidebar.classList.remove('w-20');
-            sidebar.classList.add('w-64'); // Sidebar besar
-            welcomeText.classList.remove('hidden'); // Tampilkan teks "Selamat Datang"
-            username.classList.remove('hidden'); // Tampilkan username
-            profileIcon.classList.add('hidden'); // Sembunyikan ikon profil
-            sidebarTexts.forEach(text => text.classList.remove('hidden')); // Tampilkan teks menu
+            sidebar.classList.add('w-64'); 
+            welcomeText.classList.remove('hidden'); 
+            username.classList.remove('hidden'); 
+            profileIcon.classList.add('hidden'); 
+            sidebarTexts.forEach(text => text.classList.remove('hidden')); 
         }
     });
 });

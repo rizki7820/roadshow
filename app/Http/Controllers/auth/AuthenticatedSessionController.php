@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Menampilkan halaman login.
      */
     public function create(): View
     {
@@ -20,62 +21,73 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Menangani proses login.
      */
     public function store(Request $request): RedirectResponse
-{
-    $credentials = $request->validate([
-        'username' => 'required|string', // Change from email to username
-        'password' => 'required',
-    ]);
+    {
+        $request->validate([
+            'username' => 'required|string', 
+            'password' => 'required|string',
+        ]);
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect()->intended(route('dashboard'));
+        $user = User::where('username', $request->username)->first();
+
+        if (!$user) {
+            return redirect()->back()->withErrors(['username' => 'Akun belum terdaftar. Silakan daftar terlebih dahulu.']);
+        }
+
+        if (Auth::attempt($request->only('username', 'password'))) {
+            $request->session()->regenerate(); // Tambahkan ini untuk keamanan
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->back()->withErrors(['password' => 'Password salah.']);
+        }
     }
 
-    return back()->withErrors([
-        'username' => 'The provided credentials do not match our records.',
-    ])->onlyInput('username');
-}
-
     /**
-     * Destroy an authenticated session.
+     * Logout dan hapus sesi.
      */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
-        return redirect()->route('login');
+    
+        return redirect()->route('login'); // Redirect ke halaman login setelah logout
     }
-
+    /**
+     * Handle user registration.
+     */
     public function daftar(Request $request)
     {
         $request->validate([
-            'name'           => 'required|int|min:5|unique:akuns,nip',
-            'birthdate'      => 'required|date',
-            'email'          => 'required|string|max:255',
-            'new_email'      => 'required|string|min:5|unique:users,email',
-            'username'       => 'required|int|min:10|unique:akuns,no_telfon',
-            'new_username'   => 'required|string|min:5|unique:users,username',
-            'level'          => 'required|string',
-            'passoword'      => 'required|string',
+            'name'       => 'required|string|min:5|unique:users,name',
+            'birth_date' => 'required|date',
+            'username'   => 'required|string|min:5|unique:users,username',
+            'password'   => [
+                'required',
+                'string',
+                'min:6',
+                'confirmed',
+                'regex:/[A-Z]/' // Minimal satu huruf besar
+            ],
+        ], [
+            'password.regex' => 'Password harus mengandung setidaknya satu huruf besar.',
         ]);
-    
-        User::create([
-            'name'           => $request->name,
-            'birthdate'      => $request->birthdate,
-            'email'          => $request->new_email,
-            'username'       => $request->new_username,
-            'level'          => $request->level,
-            'password'       => Hash::make($request->password),
+
+        $user = User::create([
+            'name'       => $request->name,
+            'birth_date' => $request->birth_date,
+            'username'   => $request->username,
+            'level'   => "user",
+            'password'   => Hash::make($request->password),
         ]);
-    
-        return redirect()->route('akun.create')->with('success', 'Data akun anda berhasil disimpan');
-    
+
+        if (!$user) {
+            return redirect()->back()->withErrors(['error' => 'Registrasi gagal, coba lagi.']);
+        }
+
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.');
     }
+    
 }

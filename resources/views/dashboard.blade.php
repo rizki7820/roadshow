@@ -23,30 +23,30 @@
                         <span class="material-icons">home</span>
                         <span class="ml-4">Dashboard</span>
                     </li>
-                    <a href="{{ route('akun.create') }}">
-                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer">
+                        <a href="{{ route('akun.create') }}" class="flex items-center w-full">
                             <span class="material-icons">check_circle</span>
                             <span class="ml-4">Absensi</span>
-                        </li>
-                    </a>
-                    <a href="{{ route('note.create') }}">
-                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer">
+                        <a href="{{ route('note.create') }}" class="flex items-center w-full">
                             <span class="material-icons">description</span>
                             <span class="ml-4">Catatan Harian</span>
-                        </li>
-                    </a>
-                    <a href="{{ route('akun.create') }}">
-                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer">
+                        <a href="{{ route('akun.create') }}" class="flex items-center w-full">
                             <span class="material-icons">account_circle</span>
                             <span class="ml-4">Profil Saya</span>
-                        </li>
-                    </a>
-                    <a href="/login">
-                        <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer">
+                        <a href="/login" class="flex items-center w-full">
                             <span class="material-icons">logout</span>
                             <span class="ml-4">Keluar</span>
-                        </li>
-                    </a>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
@@ -57,7 +57,7 @@
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
                 <!-- Toggle Button -->
-                <button id="toggleBtn" class="text-red-600">
+                <button id="toggleBtn" class="text-red-600 md:hidden">
                     <span class="material-icons">menu</span>
                 </button>
                 <div>
@@ -76,15 +76,13 @@
         </div>
     </div>
 
+  
     <script>
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggleBtn');
 
         toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('w-64');
-            sidebar.classList.toggle('w-0');
-            sidebar.classList.toggle('invisible');
-        });
+            sidebar.classList.toggle('-ml-64'); 
     </script>
 
 </body>

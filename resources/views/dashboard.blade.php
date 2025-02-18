@@ -13,46 +13,50 @@
     <div class="flex h-full">
 
         <!-- Sidebar -->
-        <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
-            <div class="py-4 text-center font-bold text-xl border-b border-red-700">
-                <span>Selamat Datang</span>
-            </div>
-            <nav class="flex-grow">
-                <ul>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <span class="material-icons">home</span>
-                        <span class="ml-4">Dashboard</span>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <a href="{{ route('menu.create') }}" class="flex items-center w-full">
-                            <span class="material-icons">check_circle</span>
-                            <span class="ml-4">Absensi</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <a href="{{ route('note.create') }}" class="flex items-center w-full">
-                            <span class="material-icons">description</span>
-                            <span class="ml-4">Catatan Harian</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <a href="{{ route('akun.create') }}" class="flex items-center w-full">
-                            <span class="material-icons">account_circle</span>
-                            <span class="ml-4">Profil Saya</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                        <button id="logoutButton" class="flex items-center w-full text-left">
-                            <span class="material-icons">logout</span>
-                            <span class="ml-4">Keluar</span>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+<!-- Sidebar -->
+<aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
+    <div id="sidebarHeader" class="py-4 text-center font-bold text-xl border-b border-red-700 flex items-center justify-center">
+        <span id="welcomeText">Selamat Datang</span>
+        <br>
+        <p class="text-white text-bg mt-1" id="username">{{ ucfirst(strtolower(Auth::user()->name)) }}</p>
+                <span id="profileIcon" class="material-icons hidden">account_circle</span>
+    </div>
+    <nav class="flex-grow">
+        <ul>
+            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                <span class="material-icons">home</span>
+                <span class="ml-4 sidebar-text">Dashboard</span>
+            </li>
+            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                <a href="{{ route('menu.index') }}" class="flex items-center w-full">
+                    <span class="material-icons">check_circle</span>
+                    <span class="ml-4 sidebar-text">Absensi</span>
+                </a>
+            </li>
+            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                <a href="{{ route('note.create') }}" class="flex items-center w-full">
+                    <span class="material-icons">description</span>
+                    <span class="ml-4 sidebar-text">Catatan Harian</span>
+                </a>
+            </li>
+            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                <a href="{{ route('akun.create') }}" class="flex items-center w-full">
+                    <span class="material-icons">account_circle</span>
+                    <span class="ml-4 sidebar-text">Profil Saya</span>
+                </a>
+            </li>
+            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                <button id="logoutButton" class="flex items-center w-full text-left">
+                    <span class="material-icons">logout</span>
+                    <span class="ml-4 sidebar-text">Keluar</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</aside>
 
-      
-        <div id="mainContent" class="flex-grow transition-all md:ml-64">
+        <!-- Main Content -->
+        <div class="flex-grow">
 
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
@@ -72,10 +76,9 @@
  <span>{{ session('success') }}</span>
  </div>
  @endif    
-          
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
-                    <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>
+                    <h2 class="text-lg font-semibold mb-2">Selamat Datang {{ ucfirst(strtolower(Auth::user()->name)) }} di Dashboard</h2>
                     <p class="text-gray-600 text-sm">Ini adalah halaman utama untuk mengakses fitur-fitur sistem.</p>
                 </div>
             </main>
@@ -109,14 +112,32 @@ window.addEventListener('DOMContentLoaded', () => {
                 }, 4000); 
             }
         });
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggleBtn');
+        document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebarTexts = document.querySelectorAll('.sidebar-text');
+    const welcomeText = document.getElementById('welcomeText');
+    const username = document.getElementById('username');
+    const profileIcon = document.getElementById('profileIcon');
 
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('w-64');
-            sidebar.classList.toggle('w-0');
-            sidebar.classList.toggle('invisible');
-        });
+    toggleBtn.addEventListener('click', function() {
+        if (sidebar.classList.contains('w-64')) {
+            sidebar.classList.remove('w-64');
+            sidebar.classList.add('w-20'); // Sidebar kecil
+            welcomeText.classList.add('hidden'); // Sembunyikan teks "Selamat Datang"
+            username.classList.add('hidden'); // Sembunyikan username
+            profileIcon.classList.remove('hidden'); // Tampilkan ikon profil
+            sidebarTexts.forEach(text => text.classList.add('hidden')); // Sembunyikan teks menu
+        } else {
+            sidebar.classList.remove('w-20');
+            sidebar.classList.add('w-64'); // Sidebar besar
+            welcomeText.classList.remove('hidden'); // Tampilkan teks "Selamat Datang"
+            username.classList.remove('hidden'); // Tampilkan username
+            profileIcon.classList.add('hidden'); // Sembunyikan ikon profil
+            sidebarTexts.forEach(text => text.classList.remove('hidden')); // Tampilkan teks menu
+        }
+    });
+});
 
         document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('logoutButton');
@@ -142,8 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 300); 
     });
 });
-
- </script>
+    </script>
 
 </body>
 

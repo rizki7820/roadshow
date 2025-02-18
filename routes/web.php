@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Halaman Utama
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // Dashboard

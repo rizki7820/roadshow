@@ -67,12 +67,12 @@
 
         <!-- Tombol Register -->
         <button type="submit"
-            class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
+            class="w-full bg-red-700 text-white font-semibold py-2 rounded-full hover:bg-red-800 transition duration-300">
             Register
         </button>
 
         <p class="text-center mt-4">
-            Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-500">Login</a>
+            Sudah punya akun? <a href="{{ route('login') }}" class="text-red-700 font-semibold hover:underline">Login</a>
         </p>
     </form>
 </div>

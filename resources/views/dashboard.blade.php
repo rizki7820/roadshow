@@ -11,11 +11,14 @@
 
 <body class="bg-gray-100 h-screen">
     <div class="flex h-full">
+        <!-- Overlay -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden md:hidden"></div>
 
         <!-- Sidebar -->
         <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
             <div class="py-4 text-center font-bold text-xl border-b border-red-700">
-                <span>Selamat Datang</span>
+                <span class="font-semibold">Selamat Datang</span>
+                <p class="text-white text-sm">{{ ucfirst(strtolower(Auth::user()->name)) }}</p>
             </div>
             <nav class="flex-grow">
                 <ul>
@@ -41,19 +44,21 @@
                             <span class="ml-4">Profil Saya</span>
                         </a>
                     </li>
-                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer">
-                        <a href="/login" class="flex items-center w-full">
-                            <span class="material-icons">logout</span>
-                            <span class="ml-4">Keluar</span>
-                        </a>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        <form method="POST" action="{{ route('logout') }}" class="w-full">
+                            @csrf
+                            <button type="submit" class="flex items-center w-full text-left">
+                                <span class="material-icons">logout</span>
+                                <span class="ml-4">Keluar</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </nav>
         </aside>
 
         <!-- Main Content -->
-        <div class="flex-grow">
-
+        <div id="mainContent" class="flex-grow transition-all md:ml-64">
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
                 <!-- Toggle Button -->
@@ -65,26 +70,57 @@
                 </div>
             </header>
 
+ @if(session('success'))
+ <div id="success-notification" class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-green-300 text-gray-800 p-6 rounded-xl mb-4 mt-6 opacity-100 transition-all duration-1000 ease-out z-50 shadow-lg animate-bounce">
+ <span class="material-icons mr-3">check_circle</span>
+ <span>{{ session('success') }}</span>
+ </div>
+ @endif    
             <!-- Content -->
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
-                    <h2 class="text-lg font-semibold mb-4">Selamat Datang di Dashboard</h2>
-                    <p class="text-gray-600">Ini adalah halaman utama untuk mengakses fitur-fitur sistem.</p>
+                    <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>
+                    <p class="text-gray-600 text-sm">Ini adalah halaman utama untuk mengakses fitur-fitur sistem.</p>
                 </div>
             </main>
 
         </div>
     </div>
 
-  
     <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const notification = document.getElementById('success-notification');
+            if (notification) {
+                setTimeout(() => {
+                    notification.classList.add('opacity-0'); 
+                    notification.classList.add('translate-y-[-30px]'); 
+                }, 4000);
+
+                setTimeout(() => {
+                    notification.style.display = 'none'; 
+                }, 4000); 
+            }
+        });
+
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggleBtn');
 
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('-ml-64'); 
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        });
     </script>
-
 </body>
-
 </html>

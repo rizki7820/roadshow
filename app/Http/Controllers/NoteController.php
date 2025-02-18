@@ -26,6 +26,11 @@ class NoteController extends Controller
 
         Note::create($validatedData);
 
+        return response()->json([
+            'success' => 'Data berhasil disimpan!',
+            'note' => $note
+        ]);
+
         return redirect()->route('note.index')->with('success', 'Data berhasil disimpan.');
     }
 }

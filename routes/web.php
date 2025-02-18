@@ -42,6 +42,8 @@ Route::get('/register', function () {
 // Rute Logout
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+
+
 // Resource Routes
 Route::resource('menu', AkunController::class);
 Route::resource('akun', AkunController::class);

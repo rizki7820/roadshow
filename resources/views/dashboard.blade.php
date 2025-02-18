@@ -15,10 +15,10 @@
         <!-- Sidebar -->
         <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
             <div class="py-4 text-center font-bold text-xl border-b border-red-700">
-                <span>Selamat Datang</span>
+                <span>Selamat Datang</span> 
             </div>
             <nav class="flex-grow">
-                <ul>
+                <>
                     <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
                         <span class="material-icons">home</span>
                         <span class="ml-4">Dashboard</span>
@@ -47,7 +47,7 @@
                             <span class="ml-4">Keluar</span>
                         </button>
                     </li>
-                </ul>
+                </ ul>
             </nav>
         </aside>
 

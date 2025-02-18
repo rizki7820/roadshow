@@ -74,7 +74,6 @@
  <span>{{ session('success') }}</span>
  </div>
  @endif    
-            <!-- Content -->
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
                     <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>

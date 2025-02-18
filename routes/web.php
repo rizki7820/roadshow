@@ -42,6 +42,7 @@ Route::get('/register', function () {
 // Rute Logout
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 
 // Resource Routes

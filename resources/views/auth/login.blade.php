@@ -52,7 +52,6 @@
                 Login
             </button>
         </form>
-        <!-- Tombol Register -->
         <div class="text-center mt-4">
             <p class="text-gray-600 text-sm">Belum punya akun? 
                 <a href="{{ route('register') }}" class="text-red-700 font-semibold hover:underline">

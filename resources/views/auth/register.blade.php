@@ -1,7 +1,16 @@
 @extends('../welcome')
 @section('konten')
-<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold text-center">Register</h2>
+
+<div class="background-login bg-gray-100 flex items-center justify-center min-h-screen px-4">
+    <div class="bg-white shadow-lg rounded-lg p-5 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-md">
+       
+        <div class="flex justify-center mb-4">
+            <img src="{{ asset('assets/images/telokom.png') }}" alt="Logo" class="h-20">
+        </div>
+
+       
+        <h1 class="text-2xl font-bold text-gray-800 text-center mb-1">Selamat Datang</h1>
+        <p class="text-sm text-gray-600 text-center mb-6">Please enter your details</p>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-3 rounded-lg mt-4">

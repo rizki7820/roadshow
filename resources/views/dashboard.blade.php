@@ -11,15 +11,11 @@
 
 <body class="bg-gray-100 h-screen">
     <div class="flex h-full">
-        <!-- Overlay untuk sidebar -->
-        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden md:hidden"></div>
 
         <!-- Sidebar -->
-        <aside id="sidebar"
-            class="w-64 bg-red-600 text-white flex flex-col fixed md:relative h-full transform -translate-x-full md:translate-x-0 transition-transform z-50">
+        <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
             <div class="py-4 text-center font-bold text-xl border-b border-red-700">
-                <span class="font-semibold">Selamat Datang</span>
-                <p class="text-white text-sm">{{ ucfirst(strtolower(Auth::user()->name)) }}</p>
+                <span>Selamat Datang</span>
             </div>
             <nav class="flex-grow">
                 <ul>
@@ -55,12 +51,13 @@
             </nav>
         </aside>
 
-      
-        <div id="mainContent" class="flex-grow transition-all md:ml-64">
+        <!-- Main Content -->
+        <div class="flex-grow">
 
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
-                <button id="toggleSidebar" class="md:hidden p-2 text-red-600 focus:outline-none">
+                <!-- Toggle Button -->
+                <button id="toggleBtn" class="text-red-600">
                     <span class="material-icons">menu</span>
                 </button>
                 <div>
@@ -68,13 +65,13 @@
                 </div>
             </header>
 
- @if(session('success'))
+            <!-- Content -->
+            @if(session('success'))
  <div id="success-notification" class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-green-300 text-gray-800 p-6 rounded-xl mb-4 mt-6 opacity-100 transition-all duration-1000 ease-out z-50 shadow-lg animate-bounce">
  <span class="material-icons mr-3">check_circle</span>
  <span>{{ session('success') }}</span>
  </div>
  @endif    
-          
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
                     <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>
@@ -95,8 +92,10 @@
         </div>
     </div>
 </div>
+
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+
+window.addEventListener('DOMContentLoaded', () => {
             const notification = document.getElementById('success-notification');
             if (notification) {
                 setTimeout(() => {
@@ -109,14 +108,13 @@
                 }, 4000); 
             }
         });
-
         const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const toggleButton = document.getElementById('toggleSidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
 
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('w-64');
+            sidebar.classList.toggle('w-0');
+            sidebar.classList.toggle('invisible');
         });
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -143,8 +141,8 @@
         }, 300); 
     });
 });
-
- </script>
+    </script>
 
 </body>
+
 </html>

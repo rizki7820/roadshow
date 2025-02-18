@@ -11,10 +11,10 @@
 
 <body class="bg-gray-100 h-screen">
     <div class="flex h-full">
-        <!-- Overlay -->
+  
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden md:hidden"></div>
 
-        <!-- Sidebar -->
+ 
         <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
             <div class="py-4 text-center font-bold text-xl border-b border-red-700">
                 <span class="font-semibold">Selamat Datang</span>
@@ -57,11 +57,11 @@
             </nav>
         </aside>
 
-        <!-- Main Content -->
+ 
         <div id="mainContent" class="flex-grow transition-all md:ml-64">
-            <!-- Header -->
+         
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
-                <!-- Toggle Button -->
+             
                 <button id="toggleBtn" class="text-red-600 md:hidden">
                     <span class="material-icons">menu</span>
                 </button>
@@ -76,7 +76,7 @@
  <span>{{ session('success') }}</span>
  </div>
  @endif    
-            <!-- Content -->
+          
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
                     <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>

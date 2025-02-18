@@ -12,46 +12,44 @@
 <body class="bg-gray-100 h-screen">
     <div class="flex h-full">
 
-<aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
-    <div id="sidebarHeader" class="py-4 text-center font-bold text-xl border-b border-red-700 flex items-center justify-center">
-        <span id="welcomeText">Selamat Datang</span>
-        <br>
-        <p class="text-white text-bg mt-1" id="username">{{ ucfirst(strtolower(Auth::user()->name)) }}</p>
-                <span id="profileIcon" class="material-icons hidden">account_circle</span>
-    </div>
-    <nav class="flex-grow">
-        <ul>
-            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                <span class="material-icons">home</span>
-                <span class="ml-4 sidebar-text">Dashboard</span>
-            </li>
-            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                <a href="{{ route('menu.index') }}" class="flex items-center w-full">
-                    <span class="material-icons">check_circle</span>
-                    <span class="ml-4 sidebar-text">Absensi</span>
-                </a>
-            </li>
-            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                <a href="{{ route('note.create') }}" class="flex items-center w-full">
-                    <span class="material-icons">description</span>
-                    <span class="ml-4 sidebar-text">Catatan Harian</span>
-                </a>
-            </li>
-            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                <a href="{{ route('akun.create') }}" class="flex items-center w-full">
-                    <span class="material-icons">account_circle</span>
-                    <span class="ml-4 sidebar-text">Profil Saya</span>
-                </a>
-            </li>
-            <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
-                <button id="logoutButton" class="flex items-center w-full text-left">
-                    <span class="material-icons">logout</span>
-                    <span class="ml-4 sidebar-text">Keluar</span>
-                </button>
-            </li>
-        </ul>
-    </nav>
-</aside>
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-red-600 text-white flex flex-col transition-all duration-300">
+            <div class="py-4 text-center font-bold text-xl border-b border-red-700">
+                <span>Selamat Datang</span>
+            </div>
+            <nav class="flex-grow">
+                <ul>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        <span class="material-icons">home</span>
+                        <span class="ml-4">Dashboard</span>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        <a href="{{ route('menu.create') }}" class="flex items-center w-full">
+                            <span class="material-icons">check_circle</span>
+                            <span class="ml-4">Absensi</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        <a href="{{ route('note.create') }}" class="flex items-center w-full">
+                            <span class="material-icons">description</span>
+                            <span class="ml-4">Catatan Harian</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        <a href="{{ route('akun.create') }}" class="flex items-center w-full">
+                            <span class="material-icons">account_circle</span>
+                            <span class="ml-4">Profil Saya</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-red-700 cursor-pointer flex items-center">
+                        <button id="logoutButton" class="flex items-center w-full text-left">
+                            <span class="material-icons">logout</span>
+                            <span class="ml-4">Keluar</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
         <div class="flex-grow">
 

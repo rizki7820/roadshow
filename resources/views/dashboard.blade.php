@@ -55,7 +55,7 @@
             </nav>
         </aside>
 
-        <!-- Main Content -->
+ 
         <div id="mainContent" class="flex-grow transition-all md:ml-64">
 
             <!-- Header -->
@@ -74,6 +74,7 @@
  <span>{{ session('success') }}</span>
  </div>
  @endif    
+            <!-- Content -->
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
                     <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>
@@ -129,33 +130,6 @@
                 overlay.classList.add('hidden');
             }
         });
-
-        document.addEventListener('DOMContentLoaded', function() {
-    const logoutButton = document.getElementById('logoutButton');
-    const confirmLogoutModal = document.getElementById('confirmLogoutModal');
-    const confirmYesButton = document.getElementById('confirmYes');
-    const confirmNoButton = document.getElementById('confirmNo');
-
-    logoutButton.addEventListener('click', function() {
-        confirmLogoutModal.classList.remove('hidden');
-        setTimeout(() => {
-            confirmLogoutModal.classList.add('opacity-100');
-        }, 50);
-    });
-
-    confirmYesButton.addEventListener('click', function() {
-        window.location.href = "{{ route('logout') }}"; 
-    });
-
-    confirmNoButton.addEventListener('click', function() {
-        confirmLogoutModal.classList.remove('opacity-100');
-        setTimeout(() => {
-            confirmLogoutModal.classList.add('hidden');
-        }, 300); 
-    });
-});
-
- </script>
-
+    </script>
 </body>
 </html>

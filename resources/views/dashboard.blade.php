@@ -51,8 +51,8 @@
             </nav>
         </aside>
 
-        <!-- Main Content -->
-        <div class="flex-grow">
+      
+        <div id="mainContent" class="flex-grow transition-all md:ml-64">
 
             <!-- Header -->
             <header class="bg-gray-200 py-4 px-6 border-b border-gray-300 flex justify-between items-center">
@@ -72,6 +72,7 @@
  <span>{{ session('success') }}</span>
  </div>
  @endif    
+          
             <main class="p-6">
                 <div class="bg-white shadow rounded-lg p-4">
                     <h2 class="text-lg font-semibold mb-2">Selamat Datang di Dashboard</h2>
@@ -141,7 +142,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 300); 
     });
 });
-    </script>
+
+ </script>
 
 </body>
 

@@ -10,40 +10,30 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
+// Halaman Utama
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
 
+// Dashboard
 Route::get('/home', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/register', [AuthenticatedSessionController::class, 'daftar'])->name('register');
-
 // Rute Login
-Route::get('/login', function() {
-    return view('auth.login');
-})->name('login');
-
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']); // Menangani proses login
 
 // Rute Register
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+Route::post('/register', [AuthenticatedSessionController::class, 'daftar']); // Menangani form register
 
 // Rute Logout
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-
 
 // Resource Routes
 Route::resource('menu', AkunController::class);

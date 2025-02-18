@@ -55,8 +55,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
     
-        return redirect()->route('login'); // Redirect ke halaman login setelah logout
+        return redirect()->route('login'); 
     }
+
     /**
      * Handle user registration.
      */
@@ -81,7 +82,7 @@ class AuthenticatedSessionController extends Controller
             'name'       => $request->name,
             'birth_date' => $request->birth_date,
             'username'   => $request->username,
-            'level'   => "user",
+            'level'      => "user",
             'password'   => Hash::make($request->password),
         ]);
 
@@ -91,17 +92,4 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login.');
     }
-
-    public function logout(Request $request)
-{
-    // Melakukan logout
-    Auth::logout();
-
-    // Menutup sesi dan mengalihkan ke halaman login
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return redirect()->route('login'); // Atau sesuaikan dengan rute yang sesuai
-}
-    
 }
